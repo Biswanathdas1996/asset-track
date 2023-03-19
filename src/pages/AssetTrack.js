@@ -202,6 +202,7 @@ const ExampleComponent = () => {
                   onChange={(e) =>
                     setNewItem({ ...newItem, field2: e.target.value })
                   }
+                  fullWidth
                 />
 
                 <Select
@@ -236,6 +237,7 @@ const ExampleComponent = () => {
                   onChange={(e) =>
                     setNewItem({ ...newItem, field4: e.target.value })
                   }
+                  fullWidth
                 />
                 <Button
                   variant="contained"
