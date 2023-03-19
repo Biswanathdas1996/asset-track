@@ -38,27 +38,42 @@ const ExampleComponent = () => {
 
   // Load data from local storage on component mount
   useEffect(() => {
-    const storedData = localStorage.getItem(EXAMPLE_STORAGE_KEY);
-    if (storedData) {
-      const getOldData = JSON.parse(storedData);
-      console.log("--->", getOldData);
-
-      let Credit = 0,
-        debit = 0;
-
-      getOldData?.map((dataList) => {
-        if (dataList?.field1 === "Debited") {
-          debit += parseFloat(dataList?.field2);
-        } else {
-          Credit += parseFloat(dataList?.field2);
-        }
-      });
-      setTotalCredit(Credit);
-      setTotalDebited(debit);
-      setData(getOldData);
-    }
+    fetchData();
   }, []);
 
+  const fetchData = () => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://sosal.in//endpoints/get_all_transction_data.php",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((storedData) => {
+        if (storedData) {
+          const getOldData = storedData;
+          console.log("--->", getOldData);
+
+          let Credit = 0,
+            debit = 0;
+
+          getOldData?.map((dataList) => {
+            if (dataList?.field1 === "Debited") {
+              debit += parseFloat(dataList?.field2);
+            } else {
+              Credit += parseFloat(dataList?.field2);
+            }
+          });
+          setTotalCredit(Credit);
+          setTotalDebited(debit);
+          setData(getOldData);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
   // Save data to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem(EXAMPLE_STORAGE_KEY, JSON.stringify(data));
@@ -66,8 +81,29 @@ const ExampleComponent = () => {
 
   const handleAddItem = () => {
     if (newItem?.field1 && newItem?.field2 && newItem?.field3) {
-      setData([...data, newItem]);
-      setNewItem({ field1: "", field2: "", field3: "", field4: "" });
+      var formdata = new FormData();
+      formdata.append("field1", newItem?.field1);
+      formdata.append("field2", newItem?.field2);
+      formdata.append("field3", newItem?.field3);
+      formdata.append("field4", newItem?.field4);
+
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+      };
+
+      fetch(
+        "https://sosal.in//endpoints/add_transction_data.php",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          setData([...data, newItem]);
+          setNewItem({ field1: "", field2: "", field3: "", field4: "" });
+        })
+        .catch((error) => console.log("error", error));
     }
   };
 
@@ -78,12 +114,25 @@ const ExampleComponent = () => {
   };
 
   const handleDeleteItem = (item) => {
-    setData(data.filter((i) => i !== item));
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://sosal.in/endpoints/delete_transction_data.php?id=${item?.id}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        fetchData();
+      })
+      .catch((error) => fetchData());
   };
 
   return (
     <center>
-      <h1>Add/Edit/Delete Items</h1>
+      <h1>Money Tracker</h1>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Card style={{ margin: 10, background: "#239B56", color: "white" }}>
@@ -203,6 +252,7 @@ const ExampleComponent = () => {
                   onChange={(e) =>
                     setNewItem({ ...newItem, field2: e.target.value })
                   }
+                  style={{ width: 350 }}
                   fullWidth
                 />
 
@@ -213,7 +263,7 @@ const ExampleComponent = () => {
                   onChange={(e) =>
                     setNewItem({ ...newItem, field3: e.target.value })
                   }
-                  style={{ margin: 10 }}
+                  style={{ margin: 10, width: 350 }}
                 >
                   <MenuItem value={"Investment"}>Investment</MenuItem>
                   <MenuItem value={"Food"}>Food</MenuItem>
@@ -239,6 +289,7 @@ const ExampleComponent = () => {
                     setNewItem({ ...newItem, field4: e.target.value })
                   }
                   fullWidth
+                  style={{ width: 350 }}
                 />
                 <Button
                   variant="contained"
