@@ -12,6 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import { Route, Routes, NavLink } from "react-router-dom";
 
 export default function FixedBottomNavigation() {
   const [value, setValue] = React.useState(0);
@@ -37,7 +38,9 @@ export default function FixedBottomNavigation() {
           }}
         >
           <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          <NavLink to="/track" exact activeClassName="active">
+            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          </NavLink>
           <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
         </BottomNavigation>
       </Paper>
