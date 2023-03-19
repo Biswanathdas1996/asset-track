@@ -46,11 +46,11 @@ const ExampleComponent = () => {
       let Credit = 0,
         debit = 0;
 
-      getOldData?.map((data) => {
-        if (data?.field1 === "Debited") {
-          debit += parseFloat(data?.field2);
+      getOldData?.map((dataList) => {
+        if (dataList?.field1 === "Debited") {
+          debit += parseFloat(dataList?.field2);
         } else {
-          Credit += parseFloat(data?.field2);
+          Credit += parseFloat(dataList?.field2);
         }
       });
       setTotalCredit(Credit);
@@ -65,8 +65,10 @@ const ExampleComponent = () => {
   }, [data]);
 
   const handleAddItem = () => {
-    setData([...data, newItem]);
-    setNewItem({ field1: "", field2: "", field3: "", field4: "" });
+    if (newItem?.field1 && newItem?.field2 && newItem?.field3) {
+      setData([...data, newItem]);
+      setNewItem({ field1: "", field2: "", field3: "", field4: "" });
+    }
   };
 
   const handleEditItem = () => {
@@ -173,7 +175,6 @@ const ExampleComponent = () => {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                  defaultValue="Debited"
                 >
                   <FormControlLabel
                     value="Debited"
