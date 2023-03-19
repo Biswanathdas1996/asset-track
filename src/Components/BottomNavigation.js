@@ -37,11 +37,15 @@ export default function FixedBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <NavLink to="/track" exact activeClassName="active">
-            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          <NavLink to="/" exact activeClassName="active">
+            <BottomNavigationAction label="Recents" icon={<FavoriteIcon />} />
           </NavLink>
-          <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+          <NavLink to="/track" exact activeClassName="active">
+            <BottomNavigationAction label="Favorites" icon={<RestoreIcon />} />
+          </NavLink>
+          <NavLink to="/analycis" exact activeClassName="active">
+            <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+          </NavLink>
         </BottomNavigation>
       </Paper>
     </Box>

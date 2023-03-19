@@ -8,7 +8,7 @@ import ImageIcon from "@mui/icons-material/Image";
 
 import StockData from "../Data/Stock.json";
 
-const API_END_POINT = "http://localhost:4000";
+const API_END_POINT = "http://192.168.0.130:4000";
 
 export default function FolderList({ getTotal }) {
   const [response, setResponse] = useState(null);
