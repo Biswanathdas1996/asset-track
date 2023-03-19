@@ -1,0 +1,111 @@
+[
+    {
+        "symbol": "RELIANCE",
+        "name": "RELIANCE INDUSTRIES LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8421",
+        "holding": 48
+    },
+    {
+        "symbol": "TATASTEEL",
+        "name": "TATA STEEL LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8571",
+        "holding": 800
+    },
+    {
+        "symbol": "MTARTECH",
+        "name": "MTAR Technologies Ltd",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8421",
+        "holding": 32
+    },
+    {
+        "symbol": "TATACOMM",
+        "name": "TATA COMMUNICATIONS LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8421",
+        "holding": 92
+    },
+    {
+        "symbol": "TATAPOWER",
+        "name": "TATA POWER CO.LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8571",
+        "holding": 261
+    },
+    {
+        "symbol": "SRF",
+        "name": "SRF LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.6667",
+        "holding": 30
+    },
+    {
+        "symbol": "ORIENTHOT",
+        "name": "ORIENTAL HOTELS LTD.",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8571",
+        "holding": 100
+    },
+    {
+        "symbol": "VIKASLIFE",
+        "name": "Vikas Lifecare Ltd",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8571",
+        "holding": 1000
+    },
+    {
+        "symbol": "LIQUIDBEES",
+        "name": "LIQUIDBEES",
+        "type": "Equity",
+        "region": "India/Bombay",
+        "marketOpen": "09:15",
+        "marketClose": "15:30",
+        "timezone": "UTC+5.5",
+        "currency": "INR",
+        "matchScore": "0.8571",
+        "holding": 50,
+        "price": 1000
+    }
+]
