@@ -9,7 +9,7 @@
         "timezone": "UTC+5.5",
         "currency": "INR",
         "matchScore": "0.8421",
-        "holding": 48
+        "holding": 61
     },
     {
         "symbol": "TATASTEEL",
@@ -105,7 +105,7 @@
         "timezone": "UTC+5.5",
         "currency": "INR",
         "matchScore": "0.8571",
-        "holding": 50,
+        "holding": 28,
         "price": 1000
     }
 ]

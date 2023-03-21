@@ -23,6 +23,21 @@ import CardContent from "@mui/material/CardContent";
 
 const EXAMPLE_STORAGE_KEY = "exampleStorageKey";
 
+export const expanceTypeData = [
+  "Investment",
+  "Transport",
+  "Clothing",
+  "Food",
+  "Shopping",
+  "Entertainment",
+  "Donation",
+  "Lone",
+  "Lone Repayment",
+  "EMI",
+  "Health",
+  "Other",
+];
+
 const ExampleComponent = () => {
   const [data, setData] = useState([]);
   const [newItem, setNewItem] = useState({
@@ -36,7 +51,6 @@ const ExampleComponent = () => {
   const [totalCredit, setTotalCredit] = useState(0);
   const [totalDebited, setTotalDebited] = useState(0);
 
-  // Load data from local storage on component mount
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,7 +62,7 @@ const ExampleComponent = () => {
     };
 
     fetch(
-      "https://sosal.in//endpoints/get_all_transction_data.php",
+      "https://sosal.in/endpoints/get_all_transction_data.php",
       requestOptions
     )
       .then((response) => response.json())
@@ -74,10 +88,6 @@ const ExampleComponent = () => {
       })
       .catch((error) => console.log("error", error));
   };
-  // Save data to local storage whenever it changes
-  useEffect(() => {
-    localStorage.setItem(EXAMPLE_STORAGE_KEY, JSON.stringify(data));
-  }, [data]);
 
   const handleAddItem = () => {
     if (newItem?.field1 && newItem?.field2 && newItem?.field3) {
@@ -94,7 +104,7 @@ const ExampleComponent = () => {
       };
 
       fetch(
-        "https://sosal.in//endpoints/add_transction_data.php",
+        "https://sosal.in/endpoints/add_transction_data.php",
         requestOptions
       )
         .then((response) => response.json())
@@ -134,6 +144,31 @@ const ExampleComponent = () => {
     <center>
       <h1>Money Tracker</h1>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Card
+            style={{
+              margin: 10,
+              textAlign: "center",
+              background: "#212F3D",
+              color: "white",
+            }}
+          >
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                <b>
+                  {" "}
+                  ₹
+                  {parseFloat(
+                    Number(totalCredit) - Number(totalDebited)
+                  ).toFixed(2)}
+                </b>
+              </Typography>
+              <Typography variant="body2" color="text.white">
+                Total{" "}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
         <Grid item xs={6}>
           <Card style={{ margin: 10, background: "#239B56", color: "white" }}>
             <CardContent>
@@ -188,121 +223,88 @@ const ExampleComponent = () => {
         })}
       </List>
 
-      {editItem ? (
-        <>
-          <h2>Edit Item</h2>
-          <input
-            type="text"
-            defaultValue={editItem.field1}
-            onChange={(e) => setNewItem({ ...newItem, field1: e.target.value })}
-          />
-          <input
-            type="text"
-            defaultValue={editItem.field2}
-            onChange={(e) => setNewItem({ ...newItem, field2: e.target.value })}
-          />
-          <input
-            type="text"
-            defaultValue={editItem.field3}
-            onChange={(e) => setNewItem({ ...newItem, field3: e.target.value })}
-          />
-          <button onClick={handleEditItem}>Save</button>
-        </>
-      ) : (
-        <Card>
-          <CardContent>
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <FormControl fullWidth>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                >
-                  <FormControlLabel
-                    value="Debited"
-                    control={<Radio />}
-                    label="Debited"
-                    onClick={(e) =>
-                      setNewItem({ ...newItem, field1: "Debited" })
-                    }
-                  />
-                  <FormControlLabel
-                    value="Credited"
-                    control={<Radio />}
-                    label="Credited"
-                    onClick={(e) =>
-                      setNewItem({ ...newItem, field1: "Credited" })
-                    }
-                  />
-                </RadioGroup>
-
-                <TextField
-                  id="outlined-basic"
-                  label="Amount"
-                  variant="outlined"
-                  type="number"
-                  value={newItem.field2}
-                  onChange={(e) =>
-                    setNewItem({ ...newItem, field2: e.target.value })
-                  }
-                  style={{ width: 350 }}
-                  fullWidth
+      <Card>
+        <CardContent>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <FormControl fullWidth>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="Debited"
+                  control={<Radio />}
+                  label="Debited"
+                  onClick={(e) => setNewItem({ ...newItem, field1: "Debited" })}
                 />
-
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Type"
-                  onChange={(e) =>
-                    setNewItem({ ...newItem, field3: e.target.value })
+                <FormControlLabel
+                  value="Credited"
+                  control={<Radio />}
+                  label="Credited"
+                  onClick={(e) =>
+                    setNewItem({ ...newItem, field1: "Credited" })
                   }
-                  style={{ margin: 10, width: 350 }}
-                >
-                  <MenuItem value={"Investment"}>Investment</MenuItem>
-                  <MenuItem value={"Food"}>Food</MenuItem>
-                  <MenuItem value={"Transport"}>Transport</MenuItem>
-                  <MenuItem value={"Clothing"}>Clothing</MenuItem>
-                  <MenuItem value={"Shopping"}>Shopping</MenuItem>
-                  <MenuItem value={"Entertainment"}>Entertainment</MenuItem>
-                  <MenuItem value={"Donation"}>Donation</MenuItem>
-                  <MenuItem value={"Lone"}>Lone</MenuItem>
-                  <MenuItem value={"Lone Repayment"}>Lone Repayment</MenuItem>
-                  <MenuItem value={"EMI"}>EMI</MenuItem>
-                  <MenuItem value={"Health"}>Health</MenuItem>
-                  <MenuItem value={"Other"}>Other</MenuItem>
-                </Select>
-
-                <TextField
-                  id="outlined-basic"
-                  label="Reason"
-                  variant="outlined"
-                  type="text"
-                  value={newItem.field4}
-                  onChange={(e) =>
-                    setNewItem({ ...newItem, field4: e.target.value })
-                  }
-                  fullWidth
-                  style={{ width: 350 }}
                 />
-                <Button
-                  variant="contained"
-                  onClick={handleAddItem}
-                  style={{ margin: 10 }}
-                >
-                  Add
-                </Button>
-              </FormControl>
-            </Box>
-          </CardContent>
-        </Card>
-      )}
+              </RadioGroup>
+
+              <TextField
+                id="outlined-basic"
+                label="Amount"
+                variant="outlined"
+                type="number"
+                value={newItem.field2}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, field2: e.target.value })
+                }
+                style={{ width: 350 }}
+                fullWidth
+              />
+
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Type"
+                onChange={(e) =>
+                  setNewItem({ ...newItem, field3: e.target.value })
+                }
+                style={{ margin: 10, width: 350 }}
+              >
+                {expanceTypeData?.map((data) => (
+                  <MenuItem value={data}>{data}</MenuItem>
+                ))}
+              </Select>
+
+              <TextField
+                id="outlined-basic"
+                label="Reason"
+                variant="outlined"
+                type="text"
+                value={newItem.field4}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, field4: e.target.value })
+                }
+                fullWidth
+                style={{ width: 350 }}
+              />
+              <Button
+                variant="contained"
+                onClick={handleAddItem}
+                style={{ margin: 10 }}
+              >
+                Add
+              </Button>
+            </FormControl>
+          </Box>
+        </CardContent>
+      </Card>
     </center>
   );
 };

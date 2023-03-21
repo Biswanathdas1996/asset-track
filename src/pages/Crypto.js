@@ -9,7 +9,7 @@ function App({ getTotal }) {
   const [maticPrice, setMaticPrice] = useState("");
 
   useEffect(() => {
-    fetch("http://192.168.0.130:4000/matic")
+    fetch("http://localhost:4000/matic")
       .then((response) => response.json())
       .then((data) => {
         setMaticPrice(data.data.MATIC.quote.INR.price);

@@ -38,13 +38,13 @@ export default function FixedBottomNavigation() {
           }}
         >
           <NavLink to="/" exact activeClassName="active">
-            <BottomNavigationAction label="Recents" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Assets" icon={<FavoriteIcon />} />
           </NavLink>
           <NavLink to="/track" exact activeClassName="active">
-            <BottomNavigationAction label="Favorites" icon={<RestoreIcon />} />
+            <BottomNavigationAction label="Track" icon={<RestoreIcon />} />
           </NavLink>
-          <NavLink to="/analycis" exact activeClassName="active">
-            <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+          <NavLink to="/report" exact activeClassName="active">
+            <BottomNavigationAction label="Report" icon={<ArchiveIcon />} />
           </NavLink>
         </BottomNavigation>
       </Paper>

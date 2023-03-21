@@ -5,10 +5,12 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 import StockData from "../Data/Stock.json";
 
-const API_END_POINT = "http://192.168.0.130:4000";
+const API_END_POINT = "http://localhost:4000";
 
 export default function FolderList({ getTotal }) {
   const [response, setResponse] = useState(null);
@@ -37,7 +39,7 @@ export default function FolderList({ getTotal }) {
     const findPriceData = response?.find(
       (val) => val?.data[0]?.symbol === symbol
     );
-    return findPriceData?.data[0]?.closePrice.replace(/,/g, "");
+    return findPriceData?.data[0]?.lastPrice.replace(/,/g, "");
   };
 
   const getTotalInvestment = () => {
@@ -53,28 +55,34 @@ export default function FolderList({ getTotal }) {
   getTotalInvestment();
   return (
     <>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {StockData?.map((data, index) => {
-          let total =
-            parseFloat(getPrice(data?.symbol)) * parseFloat(data?.holding);
+      <Card>
+        <CardContent>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          >
+            {StockData?.map((data, index) => {
+              let total =
+                parseFloat(getPrice(data?.symbol)) * parseFloat(data?.holding);
 
-          return (
-            <ListItem key={index}>
-              <ListItemAvatar>
-                <Avatar>
-                  <ImageIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={`${data?.name} (₹${getPrice(data?.symbol)})`}
-                secondary={`Qty: ${data?.holding}  ||  Total: ₹${parseFloat(
-                  total
-                ).toFixed(2)}`}
-              />
-            </ListItem>
-          );
-        })}
-      </List>
+              return (
+                <ListItem key={index}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ImageIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${data?.name} (₹${getPrice(data?.symbol)})`}
+                    secondary={`Qty: ${data?.holding}  ||  Total: ₹${parseFloat(
+                      total
+                    ).toFixed(2)}`}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
+        </CardContent>
+      </Card>
     </>
   );
 }
