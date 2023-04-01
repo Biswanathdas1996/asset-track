@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { BASE_URL } from "../config";
 
 const holding = 947;
 
@@ -9,7 +10,7 @@ function App({ getTotal }) {
   const [maticPrice, setMaticPrice] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:4000/matic")
+    fetch(`${BASE_URL}/matic`)
       .then((response) => response.json())
       .then((data) => {
         setMaticPrice(data.data.MATIC.quote.INR.price);

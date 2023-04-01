@@ -7,10 +7,8 @@ import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-
+import { BASE_URL as API_END_POINT } from "../config";
 import StockData from "../Data/Stock.json";
-
-const API_END_POINT = "http://localhost:4000";
 
 export default function FolderList({ getTotal }) {
   const [response, setResponse] = useState(null);
