@@ -65,16 +65,30 @@ export default function FolderList({ getTotal }) {
               return (
                 <ListItem key={index}>
                   <ListItemAvatar>
-                    <Avatar>
-                      <ImageIcon />
-                    </Avatar>
+                    <img
+                      alt="Travis Howard"
+                      src={data?.img}
+                      loading="lazy"
+                      style={{
+                        height: 65,
+                        width: 80,
+                        padding: 8,
+                      }}
+                    />
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={`${data?.name} (₹${getPrice(data?.symbol)})`}
-                    secondary={`Qty: ${data?.holding}  ||  Total: ₹${parseFloat(
-                      total
-                    ).toFixed(2)}`}
-                  />
+                  {response ? (
+                    <ListItemText
+                      primary={`${data?.name} (₹${getPrice(data?.symbol)})`}
+                      secondary={`Qty: ${
+                        data?.holding
+                      }  ||  Total: ₹${parseFloat(total).toFixed(2)}`}
+                    />
+                  ) : (
+                    <ListItemText
+                      primary={`${data?.name} `}
+                      secondary={`Qty: ${data?.holding}  `}
+                    />
+                  )}
                 </ListItem>
               );
             })}

@@ -36,6 +36,11 @@ function Home() {
       >
         Asset Tracker
       </h2>
+
+      <Stocks getTotal={getStockInfo} />
+      <Crypto getTotal={getCryptoInfo} />
+      <Others getTotal={getOthersInfo} />
+      <EPF getTotal={getEpfInfo} />
       <Card
         style={{
           margin: 10,
@@ -93,11 +98,6 @@ function Home() {
           </Typography>
         </CardContent>
       </Card>
-
-      <Stocks getTotal={getStockInfo} />
-      <Crypto getTotal={getCryptoInfo} />
-      <Others getTotal={getOthersInfo} />
-      <EPF getTotal={getEpfInfo} />
     </div>
   );
 }
